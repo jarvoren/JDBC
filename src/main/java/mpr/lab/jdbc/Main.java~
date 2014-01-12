@@ -1,0 +1,27 @@
+package mpr.lab.jdbc;
+
+import java.util.*;
+import java.sql.*;
+ 
+public class Main {
+ 
+    public static void main(String[] args) {
+        // sekcja try umożliwia wychwycenie błędów
+        try {
+            Class.forName("org.hsqldb.jdbcDriver");
+            // tworzymy wyliczenie zawierające wszystkie
+            // zarejestrowane przez DriverManager-a sterowniki
+            Enumeration en=DriverManager.getDrivers();
+            // dopóki wyliczenie jest niepuste wypisujemy
+            // nazwy zarejestrowanych sterowników
+            System.out.println("\nZarejestrowane sterowniki:\n");
+            while (en.hasMoreElements()) {
+                System.out.println("\t- "+en.nextElement().getClass().getName());
+            }
+            EasyIn.pause("\nAby zakończyć naciśnij <Enter>");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+ 
+}
